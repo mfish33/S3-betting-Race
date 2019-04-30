@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Race from #{author}
+  if(user && article.racers.includes(user.username))
+    - var frequencys=['R1','R8','F2','R7','R2','F4']
+    h3 your frequency is #{frequencys[article.racers.indexOf(user.username)]}
+  if article.racers.length==article.maxnum
+    p #{article.body}+ | The race is full
+  else
+     p #{article.body}+ | There will be a max of #{article.maxnum} racers 
+  p The bet is $#{article.bet}
+  p The people racing are: #{article.racers}
+  if user && user.username!='admin'
+    p You have $#{user.Money}
+  hr
+  if user
+    if user.id ==article.author
+      a.btn.btn-default(href='/articles/edit/'+article._id) Edit 
+    else if user.id && user.username!='admin' && article.racers.length!=article.maxnum
+       a.btn.btn-default(href='/articles/AddP/'+article._id) Join
+    else if user.username=='admin'
+      a.btn.btn-danger.delete-article(href='#',data-id=article._id) Delete
+      p winner:
+      each val, index in article.racers
+        a.btn.btn-default(href='/articles/win/'+index+'/'+article._id) #{val}
+        p
+  

@@ -1,0 +1,2 @@
+nodemon
+mongod --bind_ip=$IP

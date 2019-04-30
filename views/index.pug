@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1 #{title}
+  if user && user.username!='admin'
+    p You have $#{user.Money}
+    - var frequencys=['R1','R8','F2','R7','R2','F4']
+  ul.list-group
+    each article, i in articles
+      li.list-group-item
+        if article.racers.length==article.maxnum
+          if user && article.racers.includes(user.username)
+            a(href="/articles/"+article._id)= article.body + ' | FULL' + ' | Your frequency is '+frequencys[article.racers.indexOf(user.username)]
+          else
+            a(href="/articles/"+article._id)= article.body + ' | FULL'
+        else
+          if user && article.racers.includes(user.username)
+            a(href="/articles/"+article._id)= article.body + ' | There is ' + article.racers.length + ' racers of a maximum of ' + article.maxnum + ' signed up'+ ' | Your frequency is '+frequencys[article.racers.indexOf(user.username)]
+          else
+            a(href="/articles/"+article._id)= article.body + ' | There is ' + article.racers.length + ' racers of a maximum of ' + article.maxnum + ' signed up'

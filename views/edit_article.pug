@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Edit Listing
+  form(method='POST', action='/articles/edit/'+article._id)
+    #form-group
+      label Description:
+      textarea.form-control(name='body')= article.body
+    br
+    input.btn.btn-primary(type='submit',value='Submit')

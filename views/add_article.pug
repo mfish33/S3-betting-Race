@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 Add Listing
+  form(method='POST', action='/articles/add')
+    #form-group
+      label Description:
+      textarea.form-control(name='body' placeholder='Format: Rules | Laps / win condition')
+    #form-group
+      label Bet:
+      input.form-control(name='bet')
+    #form-group
+      label Maximum number of racers:
+      select.form-control(name='maxnum')
+        option 2
+        option 3
+        option 4
+        option 5
+        option 6
+
+    br
+    if user.username!='admin'
+      p You have $#{user.Money}
+    input.btn.btn-primary(type='submit',value='Submit')

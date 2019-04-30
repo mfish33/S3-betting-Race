@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Send Money
+  if(user && user.username=='admin')
+    form(method='POST', action='/articles/SendMoney')
+      #form-group
+        label Username:
+        textarea.form-control(name='username')
+      #form-group
+        label Amount:
+        input.form-control(name='amount')
+      br
+      input.btn.btn-primary(type='submit',value='Submit')
+  else
+    p What are you doing here?
