@@ -6,20 +6,26 @@ block content
     - var frequencys=['R1','R8','F2','R7','R2','F4']
     h3 your frequency is #{frequencys[article.racers.indexOf(user.username)]}
   if article.racers.length==article.maxnum
-    p #{article.body}+ | The race is full
+    p #{article.body} | The race is full
   else
-     p #{article.body}+ | There will be a max of #{article.maxnum} racers 
-  p The bet is $#{article.bet}
-  p The people racing are: #{article.racers}
+     p #{article.body} | There will be a max of #{article.maxnum} racers 
+  if article.racers.includes(user.username)
+     p The pot is $#{article.bet*article.racers.length}
+     p You are racing: #{article.racers}
+  else
+    p The bet is $#{article.bet}
+    p The people racing are: #{article.racers}
   if user && user.username!='admin'
-    p You have $#{user.Money}
-  hr
+    //p You have $#{user.Money}
   if user
     if user.id ==article.author
+      hr
       a.btn.btn-default(href='/articles/edit/'+article._id) Edit 
-    else if user.id && user.username!='admin' && article.racers.length!=article.maxnum
+    else if user.id && user.username!='admin' && article.racers.length!=article.maxnum && !article.racers.includes(user.username)
+       hr
        a.btn.btn-default(href='/articles/AddP/'+article._id) Join
     else if user.username=='admin'
+      hr
       a.btn.btn-danger.delete-article(href='#',data-id=article._id) Delete
       p winner:
       each val, index in article.racers

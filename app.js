@@ -37,6 +37,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+
+const cors = require('cors');
+app.use(cors());
+app.options('*', cors());
+
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -93,6 +98,16 @@ app.get('/', function(req, res){
         title:'Races',
         articles: articles
       });
+    }
+  });
+});
+
+app.get('/android/', function(req, res){
+  Article.find({}, function(err, articles){
+    if(err){
+      console.log(err);
+    } else {
+      return res.json(articles);
     }
   });
 });

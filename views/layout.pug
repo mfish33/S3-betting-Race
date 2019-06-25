@@ -42,6 +42,8 @@ html
       block content
       br
       hr
+      if user && user.username!='admin'
+        p You have: $#{user.Money}
       footer
     script(src='/bower_components/jquery/dist/jquery.js')  
     script(src='/bower_components/bootstrap/dist/js/bootstrap.js')

@@ -3,7 +3,7 @@ extends layout
 block content
   h1 #{title}
   if user && user.username!='admin'
-    p You have $#{user.Money}
+    //p You have $#{user.Money}
     - var frequencys=['R1','R8','F2','R7','R2','F4']
   ul.list-group
     each article, i in articles
